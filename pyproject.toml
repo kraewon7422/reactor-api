@@ -1,0 +1,60 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "reactor-api"
+version = "1.0.0"
+description = "Ideal-reactor simulation engine (batch / CSTR / PFR) for arbitrary reaction networks, served as a FastAPI web API"
+readme = "README.md"
+license = {text = "Apache-2.0"}
+authors = [{name = "kraewon7422"}]
+requires-python = ">=3.10"
+keywords = ["chemical engineering", "reactor", "CSTR", "PFR", "kinetics", "simulation", "fastapi"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Framework :: FastAPI",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: Apache Software License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Scientific/Engineering :: Chemistry",
+]
+dependencies = [
+    "numpy>=1.24",
+    "scipy>=1.10",
+    "fastapi>=0.110",
+    "pydantic>=2.5",
+    "uvicorn>=0.27",
+]
+
+[project.optional-dependencies]
+test = ["pytest>=7", "httpx>=0.26"]
+dev = ["pytest>=7", "httpx>=0.26", "ruff>=0.5"]
+
+[project.scripts]
+reactor-api = "reactor_api.__main__:main"
+
+[project.urls]
+Homepage = "https://github.com/kraewon7422/reactor-api"
+Issues = "https://github.com/kraewon7422/reactor-api/issues"
+
+[tool.setuptools]
+packages = ["reactor_api"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+filterwarnings = ["ignore::DeprecationWarning"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP"]
+ignore = ["UP006", "UP007", "UP035", "UP045", "B008"]
